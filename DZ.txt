@@ -1,0 +1,151 @@
+#include "pch.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+
+void menu()
+{
+	cout << "1. Распечатка " <<endl;
+	cout << "2. Добавление авто в базу" << endl;
+	cout << "3. Удаление по id" << endl;
+	cout << "4. Информация по категориям" << endl;
+	cout << "5. Сохранение в файл" << endl;
+	cout << "6. Сортировка по году" << endl;
+	cout << "7. Информация по цене" << endl;
+	cout << "0. Выход" << endl;
+}
+
+struct car
+{
+	int id;
+	string mark;
+	string color;
+	string categoty;
+	int year;
+	float price;
+	bool old;
+};
+
+vector<car> toprogram(string name)
+{
+	ifstream fin;
+	fin.open(name);
+	vector<car> v;
+	if (fin.is_open() == true)
+	{
+		while (!fin.eof())
+		{
+			car buf;
+			fin >> buf.id;
+			fin >> buf.mark;
+			fin >> buf.year;
+			fin >> buf.color;
+			fin >> buf.categoty;
+			fin >> buf.price;
+			fin >> buf.old;
+			v.push_back(buf);
+		}
+		return v;
+		fin.close();
+	}
+	else
+	{
+		cout << "Не удалось открыть файл" << endl;
+	}
+}
+
+void print(vector<car> v)
+{
+	for (int i = 0; i < v.size(); i++)
+	{
+		cout << left << setw(5) << v[i].id << setw(10) << v[i].mark << setw(10) << v[i].year << setw(10) << v[i].color << setw(10) << v[i].categoty << setw(10) << v[i].price << setw(10) << v[i].old << endl;
+	}
+}
+
+void withoutcar(vector<car> &v, int id)
+{
+	for (int i = 0; i < v.size(); i++)
+	{
+		if (v[i].id == id)
+		{
+			v.erase(v.begin() + i);
+		}
+	}
+}
+
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	vector<car> v = toprogram("input.txt");
+	int answer = -1;
+	while (answer != 0)
+	{
+		menu();
+		cin >> answer;
+		system("cls");
+		switch (answer)
+		{
+			case 1:
+			{
+				print(v);
+				break;
+			}
+			case 2:
+			{
+				car buf;
+				cout << "Введите Id, Mark, Color, Category, Year, Price, Old" << endl;
+				cin >> buf.id >> buf.mark >> buf.color >> buf.categoty >> buf.year >> buf.price >> buf.old;
+				v.push_back(buf);
+				break;
+			}
+			case 3:
+			{
+				int num;
+				cout << "Какой id удаляем?" << endl;
+				cin >> num;
+				withoutcar(v, num);
+				break;
+			}
+			case 4:
+			{
+				int ans;
+				cout << "1. Поиск по категории" << endl;
+				cout << "2. Поиск только по новым" << endl;
+				switch (ans)
+				{
+					case 1:
+					{
+						int ctgry;
+						string marka;
+						cout << "1. Легковые" << endl;
+						cout << "2. Грузовые" << endl;
+						cout << "3. Спортивные" << endl;
+						cin >> ctgry;
+						switch (ctgry)
+						{
+							case 1:
+							{
+								marka = "light";
+							}
+						}
+						for (int i = 0; i < v.size(); i++)
+						{
+							if(v[i].categoty == )
+						}
+					}
+					case 2:
+					{
+
+					}
+				}
+			}
+
+		}
+
+	}
+	system("pause");
+}
