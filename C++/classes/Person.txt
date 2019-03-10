@@ -1,0 +1,65 @@
+#include "pch.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person
+{
+private:
+	int age;
+public:
+	string Name;
+	string Gender;
+
+	Person(int a, string n, string g)
+	{
+		age = a;
+		Name = n;
+		Gender = g;
+	}
+	
+	void Show()
+	{
+		cout << age << " " << Name << " " << Gender << endl;
+	}
+
+	void ChangeGender(string g)
+	{
+		Gender = g;
+	}
+	void BirthDay()
+	{
+		age++;
+	}
+	int GetAge()
+	{
+		return age;
+	}
+	void SetAge(int a)
+	{
+		if (a > 0)
+		{
+			age = a;
+		}
+		else
+		{
+			cout << "Error, incorrect number." << endl;
+		}
+	}
+};
+
+void main()
+{
+	setlocale(LC_ALL, "Rus");
+	Person a = Person(16, "Andrey", "male");
+	a.Show();
+	a.ChangeGender("female");
+	a.BirthDay();
+	a.Show();
+	cout<<a.GetAge()<<endl;
+	a.SetAge(20);
+	cout << a.GetAge() << endl;
+
+	system("pause");
+}

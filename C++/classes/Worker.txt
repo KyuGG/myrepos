@@ -1,0 +1,130 @@
+#include "pch.h"
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Worker
+{
+private:
+	int age;
+	float salary;
+	float money;
+	string name;
+	string company;
+	int experience;
+public:
+
+	//construct
+	Worker()
+	{
+		age = 0;
+		salary = 0.0;
+		money = 0.0;
+		name = "";
+		company = "";
+		experience = 0;
+	}
+	Worker(int a, float s, float m, string n, string c, int e)
+	{
+		age = a;
+		salary = s;
+		money = m;
+		name = n;
+		company = c;
+		experience = e;
+	}
+	//methods
+	void Show()
+	{
+		cout << age << " " << salary << " " << money << " " << name << " " << company << " " << experience << endl;
+	}
+
+	float GetSalary()
+	{
+		return salary;
+	}
+	void SetSalary(float s)
+	{
+		salary = s;
+	}
+	int GetAge()
+	{
+		return age;
+	}
+	void SetAge(int a)
+	{
+		if (a > 0)
+		{
+			age = a;
+		}
+		else
+		{
+			cout << "Error, incorrect number." << endl;
+		}
+	}
+	float GetMoney()
+	{
+		return money;
+	}
+	string GetName()
+	{
+		return name;
+	}
+	string GetCompany()
+	{
+		return company;
+	}
+	void SetCompany(string c)
+	{
+		company = c;
+	}
+	int GetExperience()
+	{
+		return experience;
+	}
+	void SetExperience(int e)
+	{
+		if (age - experience >= 16)
+		{
+			experience = e;
+		}
+		else
+		{
+			cout << "error" << endl;
+		}
+	}
+};
+
+void main()
+{
+	setlocale(LC_ALL, "Rus");
+	vector<Worker> wk;
+	float srZP = 0;
+	string str;
+	Worker A = Worker(12, 2000, 20000, "kostan", "microsoft", 3);
+	Worker B = Worker(12, 20000, 2000, "kostan2", "mirosoft", 3);
+	Worker C = Worker(12, 10500, 20000, "kostan3", "microoft", 3);
+	wk.push_back(A);
+	wk.push_back(B);
+	wk.push_back(C);
+	for (int i = 0; i < wk.size(); i++)
+	{
+		wk[i].Show();
+		srZP += wk[i].GetSalary();
+	}
+	srZP = (srZP * 1.0) / wk.size();
+	for (int i = 0; i < wk.size(); i++)
+	{
+		if (wk[i].GetSalary() < srZP)
+		{
+			wk[i].SetSalary(wk[i].GetSalary() + 2000);
+		}
+	}
+	for (int i = 0; i < wk.size(); i++)
+	{
+		wk[i].Show();
+	}
+	system("pause");
+}
